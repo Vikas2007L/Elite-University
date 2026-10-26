@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Building2, IndianRupee, Users, Play, ExternalLink, Download, FileText } from "lucide-react";
+import { TrendingUp, Building2, IndianRupee, Users, Download, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area } from "recharts";
+import { ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area } from "recharts";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -22,6 +22,31 @@ const topRecruiters = [
   { name: "Meta", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
   { name: "Netflix", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
 ];
+
+const placementReports = [
+  {
+    year: "2024 - 25",
+    status: "Recent",
+    color: "border-accent",
+    placementRate: "95%",
+    averagePackage: "12.5 LPA",
+    highestPackage: "48 LPA",
+    recruiters: "300+",
+    highlights: ["Career-readiness and interview preparation", "Internship and employer engagement", "Offers across technology, engineering, and business roles"],
+  },
+  {
+    year: "2023 - 24",
+    status: "Archive",
+    color: "border-primary/20",
+    placementRate: "92%",
+    averagePackage: "11.2 LPA",
+    highestPackage: "42 LPA",
+    recruiters: "250+",
+    highlights: ["Campus recruitment and internship support", "Pre-placement training and mock interviews", "Opportunities across multiple industry sectors"],
+  },
+];
+
+type PlacementReport = typeof placementReports[number];
 
 const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const [displayValue, setDisplayValue] = useState(0);
@@ -45,19 +70,34 @@ const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 };
 
 const Placements = () => {
-  const handleAction = (type: 'view' | 'download', report: string) => {
-    const action = type === 'view' ? 'Opening' : 'Starting download for';
-    const samplePdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-    
-    toast.success(`${action} ${report}`, {
-      description: type === 'download' ? "The PDF will be ready in a few seconds." : "Redirecting to secure document viewer...",
-      duration: 3000,
-    });
+  const handleAction = (type: "view" | "download", report: PlacementReport) => {
+    const reportText = [
+      `ELITE University Placement Report ${report.year}`,
+      "",
+      "Illustrative placement overview. Confirm figures with the Placement Office before external use.",
+      "",
+      `Placement rate: ${report.placementRate}`,
+      `Average package: ${report.averagePackage}`,
+      `Highest package: ${report.highestPackage}`,
+      `Recruiters: ${report.recruiters}`,
+      "",
+      "Highlights:",
+      ...report.highlights.map((highlight) => `- ${highlight}`),
+    ].join("\n");
+    const reportUrl = URL.createObjectURL(new Blob([reportText], { type: "text/plain" }));
 
-    // Simulate opening the file after a short delay for better UX
-    setTimeout(() => {
-      window.open(samplePdfUrl, '_blank');
-    }, 1000);
+    if (type === "view") {
+      window.open(reportUrl, "_blank", "noopener,noreferrer");
+      toast.success(`Opening Placement Report ${report.year}`);
+    } else {
+      const link = document.createElement("a");
+      link.href = reportUrl;
+      link.download = `elite-placement-report-${report.year.replace(/\s+/g, "-")}.txt`;
+      link.click();
+      toast.success(`Downloaded Placement Report ${report.year}`);
+    }
+
+    window.setTimeout(() => URL.revokeObjectURL(reportUrl), 60_000);
   };
 
   return (
@@ -210,14 +250,12 @@ const Placements = () => {
         <div className="container relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Placement <span className="text-accent underline">Reports</span></h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Detailed analysis and statistics of our recent placement drives. Download the comprehensive reports below.</p>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Review placement outcomes, salary highlights, recruiter reach, and career support from recent academic years.</p>
+            <p className="text-xs text-muted-foreground mt-3">Illustrative website figures; contact the Placement Office for verified institutional reports.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            {[
-              { year: "2024 - 25", status: "Recent", color: "border-accent" },
-              { year: "2023 - 24", status: "Archive", color: "border-primary/20" },
-            ].map((report, i) => (
+            {placementReports.map((report, i) => (
               <motion.div
                 key={report.year}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -232,19 +270,35 @@ const Placements = () => {
                     </div>
                     <Badge variant="outline" className="mb-4">{report.status}</Badge>
                     <h3 className="text-2xl font-bold mb-6">Placement Report {report.year}</h3>
+                    <div className="grid grid-cols-2 gap-3 text-left mb-6">
+                      {[
+                        { label: "Placement rate", value: report.placementRate },
+                        { label: "Average package", value: report.averagePackage },
+                        { label: "Highest package", value: report.highestPackage },
+                        { label: "Recruiters", value: report.recruiters },
+                      ].map((stat) => (
+                        <div key={stat.label} className="rounded-xl bg-muted/60 p-3">
+                          <p className="text-xs text-muted-foreground">{stat.label}</p>
+                          <p className="font-bold text-primary">{stat.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <ul className="text-left text-sm text-muted-foreground space-y-2 mb-6">
+                      {report.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}
+                    </ul>
                     <div className="flex flex-col gap-3">
                       <Button 
-                        onClick={() => handleAction('view', `Placement Report ${report.year}`)}
+                        onClick={() => handleAction("view", report)}
                         className="w-full bg-primary font-bold rounded-xl shadow-lg shadow-primary/20"
                       >
-                        View Document
+                        View Report Summary
                       </Button>
                       <Button 
-                        onClick={() => handleAction('download', `Placement Report ${report.year}`)}
+                        onClick={() => handleAction("download", report)}
                         variant="outline" 
                         className="w-full font-bold rounded-xl hover:bg-accent hover:text-accent-foreground"
                       >
-                        Download PDF <Download className="ml-2 h-4 w-4" />
+                        Download Summary <Download className="ml-2 h-4 w-4" />
                       </Button>
                     </div>
                   </CardContent>

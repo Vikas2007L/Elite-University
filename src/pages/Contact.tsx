@@ -10,7 +10,7 @@ const Contact = () => (
   <div className="min-h-screen bg-muted/30">
     <section className="relative h-[300px] flex items-center overflow-hidden">
       <img 
-        src="https://images.unsplash.com/photo-1498243639359-2818a74e2001?q=80&w=1200&auto=format&fit=crop" 
+        src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop"
         alt="Contact Hero" 
         className="absolute inset-0 w-full h-full object-cover"
       />
@@ -44,10 +44,10 @@ const Contact = () => (
           <h2 className="text-3xl font-bold text-primary mb-8">Get in Touch</h2>
           <div className="grid gap-6">
             {[
-              { icon: MapPin, label: "Address", value: "123 University Road, City, State 560001, India", img: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?w=400&q=80" },
+              { icon: MapPin, label: "Office Address", value: "123 University Road, City, State 560001, India", img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80" },
               { icon: Phone, label: "Phone", value: "+91 1234 567 890", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80" },
               { icon: Mail, label: "Email", value: "info@university.edu", img: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=400&q=80" },
-              { icon: Clock, label: "Office Hours", value: "Mon - Sat: 9:00 AM - 5:00 PM", img: "https://images.unsplash.com/photo-1495446815901-a7297e63b18d?w=400&q=80" },
+              { icon: Clock, label: "Office Hours", value: "Mon - Sat: 9:00 AM - 5:00 PM", img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&q=80" },
             ].map((c, i) => (
               <Card key={c.label} className="overflow-hidden border-0 shadow-md group hover:shadow-xl transition-all duration-300 rounded-2xl">
                 <div className="flex flex-col md:flex-row h-full">

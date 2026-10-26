@@ -7,14 +7,16 @@ import { MapPin, Clock, Calendar as CalendarIcon, ArrowRight, Music, FlaskConica
 import { motion, AnimatePresence } from "framer-motion";
 
 const events = [
-  { id: 1, date: new Date(2026, 2, 28), title: "Tech Innovate 2026", time: "10:00 AM", location: "Auditorium", category: "Technical", icon: FlaskConical },
-  { id: 2, date: new Date(2026, 3, 5), title: "Annual Sports Meet", time: "08:00 AM", location: "Sports Complex", category: "Sports", icon: Trophy },
-  { id: 3, date: new Date(2026, 3, 12), title: "Cultural Night", time: "06:00 PM", location: "Open Air Theatre", category: "Cultural", icon: Music },
-  { id: 4, date: new Date(2026, 3, 15), title: "Alumni Meetup", time: "11:00 AM", location: "Main Hall", category: "Alumni", icon: Users },
+  { id: 1, date: new Date(2026, 10, 7), title: "Tech Innovate 2026", time: "10:00 AM", location: "Auditorium", category: "Technical", icon: FlaskConical, image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=900&auto=format&fit=crop" },
+  { id: 2, date: new Date(2026, 10, 14), title: "Annual Sports Meet", time: "08:00 AM", location: "Sports Complex", category: "Sports", icon: Trophy, image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=900&auto=format&fit=crop" },
+  { id: 3, date: new Date(2026, 11, 4), title: "Cultural Night", time: "06:00 PM", location: "Open Air Theatre", category: "Cultural", icon: Music, image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=900&auto=format&fit=crop" },
+  { id: 4, date: new Date(2026, 11, 12), title: "Alumni Meetup", time: "11:00 AM", location: "Main Hall", category: "Alumni", icon: Users, image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=900&auto=format&fit=crop" },
 ];
 
 const Events = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>(() => (
+    events.find((event) => event.date >= new Date())?.date ?? new Date()
+  ));
 
   const selectedEvents = events.filter(e => e.date.toDateString() === date?.toDateString());
 
@@ -72,6 +74,11 @@ const Events = () => {
                   {selectedEvents.map(e => (
                     <Card key={e.id} className="group hover:shadow-2xl transition-all duration-500 border-0 bg-background overflow-hidden">
                       <div className="flex flex-col md:flex-row">
+                        <img
+                          src={e.image}
+                          alt={`${e.title} event`}
+                          className="h-52 w-full object-cover md:h-auto md:w-56"
+                        />
                         <div className="w-2 bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <CardContent className="p-8 flex-1 flex flex-col md:flex-row items-center gap-8">
                           <div className="h-20 w-20 rounded-3xl bg-primary/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors">

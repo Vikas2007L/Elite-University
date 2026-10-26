@@ -10,10 +10,24 @@ const deptImages: Record<string, string> = {
   cs: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop",
   ece: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=1200&auto=format&fit=crop",
   mech: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1200&auto=format&fit=crop",
-  civil: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=1200&auto=format&fit=crop",
-  physics: "https://images.unsplash.com/photo-1532187863486-abf9d39d9992?q=80&w=1200&auto=format&fit=crop",
-  mba: "https://images.unsplash.com/photo-1454165833767-02a698d5896c?q=80&w=1200&auto=format&fit=crop",
+  civil: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop",
+  physics: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1200&auto=format&fit=crop",
+  mba: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1200&auto=format&fit=crop",
 };
+
+const facultyPortraits = [
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
+];
+
+const labImages = [
+  "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop",
+];
 
 const deptData: Record<string, { name: string; about: string; vision: string; programs: string[]; faculty: { name: string; title: string; specialization: string }[]; labs: string[]; achievements: string[]; hod: { name: string; email: string }; syllabus: { semester: string; subjects: string[] }[] }> = {
   cs: {
@@ -242,8 +256,8 @@ const DepartmentDetail = () => {
                     <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl h-full flex flex-col hover:-translate-y-2">
                       <div className="h-48 overflow-hidden relative">
                         <img 
-                          src={`https://images.unsplash.com/photo-1${573496359142 + i}-b8d87734a5a2?w=400&q=80`} 
-                          alt={f.name} 
+                          src={facultyPortraits[i % facultyPortraits.length]}
+                          alt={`Faculty portrait representing ${f.title}`}
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors" />
@@ -251,7 +265,11 @@ const DepartmentDetail = () => {
                       <CardContent className="p-6 text-center">
                         <h4 className="font-bold text-lg mb-1 group-hover:text-accent transition-colors">{f.name}</h4>
                         <Badge variant="secondary" className="mb-3">{f.title}</Badge>
+                        <p className="text-xs font-bold uppercase tracking-wider text-accent mb-2">Teaching & research focus</p>
                         <p className="text-sm text-muted-foreground font-medium">{f.specialization}</p>
+                        <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                          Supports student learning, project supervision, and applied research in {f.specialization.toLowerCase()}.
+                        </p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -260,12 +278,26 @@ const DepartmentDetail = () => {
             </TabsContent>
 
             <TabsContent value="labs">
-              <div className="grid sm:grid-cols-2 gap-4">
-                {dept.labs.map((l) => (
-                  <Card key={l}><CardContent className="p-6 flex items-center gap-3">
-                    <FlaskConical className="h-5 w-5 text-accent shrink-0" />
-                    <span className="font-medium">{l}</span>
-                  </CardContent></Card>
+              <div className="grid sm:grid-cols-2 gap-6">
+                {dept.labs.map((l, i) => (
+                  <Card key={l} className="group overflow-hidden border-0 shadow-md">
+                    <div className="h-44 overflow-hidden">
+                      <img
+                        src={labImages[i % labImages.length]}
+                        alt={`${l} research facility`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="font-bold flex items-center gap-2 mb-2">
+                        <FlaskConical className="h-5 w-5 text-accent shrink-0" />
+                        {l}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Practical learning and supervised student projects connect core concepts with current research and real-world applications.
+                      </p>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </TabsContent>

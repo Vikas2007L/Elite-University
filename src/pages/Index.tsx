@@ -38,10 +38,10 @@ const departments = [
 ];
 
 const news = [
-  { date: "Mar 25, 2026", title: "ELITE University Ranked #12 in National Rankings 2026", category: "Achievement" },
-  { date: "Mar 20, 2026", title: "International Conference on AI & Machine Learning", category: "Event" },
-  { date: "Mar 15, 2026", title: "Campus Placement Drive — 95% Students Placed", category: "Placements" },
-  { date: "Mar 10, 2026", title: "New Research Centre for Sustainable Energy Inaugurated", category: "Research" },
+  { date: "Mar 25, 2026", title: "ELITE University Ranked #12 in National Rankings 2026", category: "Achievement", image: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" },
+  { date: "Mar 20, 2026", title: "International Conference on AI & Machine Learning", category: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" },
+  { date: "Mar 15, 2026", title: "Campus Placement Drive — 95% Students Placed", category: "Placements", image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=800&auto=format&fit=crop" },
+  { date: "Mar 10, 2026", title: "New Research Centre for Sustainable Energy Inaugurated", category: "Research", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop" },
 ];
 
 const CountUp = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
@@ -82,7 +82,7 @@ const Index = () => {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale"
-            poster="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80"
+            poster="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80"
           >
             <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-campus-with-large-buildings-4435-large.mp4" type="video/mp4" />
           </video>
@@ -206,7 +206,7 @@ const Index = () => {
                       src={d.code === 'cs' ? "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=400&auto=format&fit=crop" :
                            d.code === 'ece' ? "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=400&auto=format&fit=crop" :
                            d.code === 'mech' ? "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=400&auto=format&fit=crop" :
-                           "https://images.unsplash.com/photo-1503387762-fa47c39f2e0a?q=80&w=400&auto=format&fit=crop"} // Updated Civil ID
+                      "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=400&auto=format&fit=crop"}
                       alt={d.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -256,8 +256,8 @@ const Index = () => {
               <div className="absolute -inset-4 bg-accent/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?q=80&w=800&auto=format&fit=crop" 
-                  alt="Modern Campus" 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+                  alt="Student collaborating in the Innovation Center"
                   className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-8">
@@ -284,8 +284,8 @@ const Index = () => {
               <Card key={i} className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-3xl h-full flex flex-col hover:-translate-y-2">
                 <div className="h-40 overflow-hidden relative">
                   <img 
-                    src={`https://images.unsplash.com/photo-1501503060413-108851410408?q=80&w=400&auto=format&fit=crop&sig=${i}`} 
-                    alt="News"
+                    src={n.image}
+                    alt={n.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4">

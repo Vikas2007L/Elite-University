@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 
 const facilities = [
-  { icon: Home, title: "Hostels", desc: "Separate hostels for boys and girls with modern amenities.", category: "Living", image: "https://images.unsplash.com/photo-1555854817-2b2260340319?q=80&w=600&auto=format&fit=crop" },
+  { icon: Home, title: "Hostels", desc: "Separate hostels for boys and girls with modern amenities.", category: "Living", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop" },
   { icon: Dumbbell, title: "Sports Complex", desc: "Olympic-size pool, cricket ground, basketball & tennis courts.", category: "Recreation", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop" },
-  { icon: Music, title: "Cultural Hub", desc: "Auditorium, music room, dance studio, and art gallery.", category: "Social", image: "https://images.unsplash.com/photo-1514525253361-bee8718a300c?q=80&w=600&auto=format&fit=crop" },
+  { icon: Music, title: "Cultural Hub", desc: "Auditorium, music room, dance studio, and art gallery.", category: "Social", image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=600&auto=format&fit=crop" },
   { icon: Utensils, title: "Dining", desc: "Multiple canteens and cafeterias with diverse cuisines.", category: "Dining", image: "https://images.unsplash.com/photo-1567521464027-f127ff144326?q=80&w=600&auto=format&fit=crop" },
-  { icon: BookOpen, title: "Library", desc: "Central library with 2 lakh+ books and digital resources.", category: "Academic", image: "https://images.unsplash.com/photo-1507842217357-1943c8290333?q=80&w=600&auto=format&fit=crop" }, // Updated Library ID
+  { icon: BookOpen, title: "Library", desc: "Central library with 2 lakh+ books and digital resources.", category: "Academic", image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop" },
   { icon: Heart, title: "Health Centre", desc: "24/7 medical facility with ambulance service on campus.", category: "Wellness", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=600&auto=format&fit=crop" }, // Updated Health ID
 ];
 
@@ -50,6 +50,12 @@ const CampusLife = () => {
   return (
     <div className="bg-muted/30 min-h-screen pt-20">
       <section className="bg-primary text-primary-foreground py-24 relative overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1600&auto=format&fit=crop"
+          alt="University campus buildings and grounds"
+          className="absolute inset-0 h-full w-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-primary/75" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,hsl(var(--accent))_0%,transparent_50%)] opacity-30" />
         <div className="container relative z-10 text-center">
           <motion.h1 
@@ -67,6 +73,30 @@ const CampusLife = () => {
           >
             A vibrant community where academic excellence meets holistic development.
           </motion.p>
+        </div>
+      </section>
+
+      <section className="py-20 bg-muted/30">
+        <div className="container grid lg:grid-cols-2 gap-10 items-center">
+          <div className="overflow-hidden rounded-[2rem] shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+              alt="Students collaborating on a prototype in the Innovation Centre"
+              className="w-full h-[340px] object-cover"
+            />
+          </div>
+          <div>
+            <Badge variant="outline" className="mb-4 border-accent text-accent">Ideas into impact</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Innovation Centre</h2>
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              A collaborative space for students, faculty, and industry mentors to explore ideas, build prototypes, and take on interdisciplinary projects.
+            </p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li>• Project mentoring and design-thinking workshops</li>
+              <li>• Prototype development and student-led team projects</li>
+              <li>• Opportunities to present ideas at campus showcases</li>
+            </ul>
+          </div>
         </div>
       </section>
 
